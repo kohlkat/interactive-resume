@@ -39,7 +39,6 @@ export default function Briefing() {
       </section>
 
       <section className="brief-file" aria-label="Export">
-        <p>The mailing address is only in the file.</p>
         <div className="file-row">
           <a className="file-link" href="/docs/David%20Kohler%20resume.docx" download>Resume</a>
           <a className="file-link" href="/docs/David%20Kohler%20cover%20letter.docx" download>Cover letter</a>

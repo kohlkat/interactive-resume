@@ -14,7 +14,6 @@ export default function ResumePage() {
       <p style={{ color: 'var(--muted)', marginTop: 8 }}>
         David Kohler · Robotics software, controls, and full-stack · Pittsburgh
       </p>
-      <p className="privacy-note">Mailing address is only in the downloaded file.</p>
       <article className="card doc">{resumePublic}</article>
     </div>
   )

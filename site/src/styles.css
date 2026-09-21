@@ -5,7 +5,6 @@
   --muted: #93a0b8;
   --line: rgba(232, 237, 247, 0.14);
   --accent: #5eead4;
-  --warn: #fbbf24;
   --card: rgba(16, 21, 34, 0.82);
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -136,12 +135,6 @@ h1, h2, h3 {
   line-height: 1.55;
 }
 
-.brief-file p {
-  margin: 0 0 12px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
 .file-row {
   display: flex;
   flex-wrap: wrap;
@@ -173,12 +166,6 @@ h1, h2, h3 {
 }
 
 .brief-foot a { color: var(--muted); }
-
-.privacy-note {
-  color: var(--warn);
-  font-size: 12px;
-  margin: 8px 0 14px;
-}
 
 .page {
   max-width: 40rem;

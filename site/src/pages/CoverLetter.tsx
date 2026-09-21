@@ -14,7 +14,6 @@ export default function CoverLetterPage() {
       <p style={{ color: 'var(--muted)', marginTop: 8 }}>
         General letter for robotics software, controls, simulation, or full-stack roles.
       </p>
-      <p className="privacy-note">Mailing address is only in the downloaded file.</p>
       <article className="card doc">{coverPublic}</article>
     </div>
   )
