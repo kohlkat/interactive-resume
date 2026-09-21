@@ -1,4 +1,3 @@
-import { Html } from '@react-three/drei'
 import { stationPose, TOUR } from '../scene/stations'
 
 type Props = {
@@ -24,16 +23,10 @@ export function ThreeScene({ unlocked }: Props) {
           <cylinderGeometry args={[0.42, 0.42, 0.04, 40]} />
           <meshStandardMaterial {...steel} />
         </mesh>
-        <mesh position={[0, 0.55, 0]}>
-          <cylinderGeometry args={[0.012, 0.012, 0.9, 12]} />
+        <mesh position={[0, 0.42, 0]}>
+          <cylinderGeometry args={[0.01, 0.01, 0.64, 12]} />
           <meshStandardMaterial color="#5eead4" metalness={0.4} roughness={0.25} emissive="#115e59" emissiveIntensity={0.35} />
         </mesh>
-        <Html position={[0, 1.15, 0]} center distanceFactor={11} zIndexRange={[10, 0]} style={{ pointerEvents: 'none' }}>
-          <div className="intro-mark">
-            <strong>David Kohler</strong>
-            <span>Robotics, controls, and software · Pittsburgh</span>
-          </div>
-        </Html>
       </group>
 
       {TOUR.map((stop, i) => {
@@ -59,9 +52,6 @@ export function ThreeScene({ unlocked }: Props) {
                 emissiveIntensity={on ? 0.7 : 0.15}
               />
             </mesh>
-            <Html position={[0, 0.78, 0]} center distanceFactor={12} zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
-              <div className={`mark${on ? ' open' : ''}`}>{stop.short}</div>
-            </Html>
           </group>
         )
       })}

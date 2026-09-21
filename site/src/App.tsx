@@ -43,9 +43,10 @@ function Stage() {
         <NavLink to="/contact" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Contact</NavLink>
       </nav>
 
+      <div className="canvas-slot">
       <div className="canvas-shell">
         <Canvas
-          camera={{ position: [0, 4.6, 8.4], fov: 36 }}
+          camera={{ position: [0, 6.4, 7.2], fov: 34 }}
           dpr={[1, 1.5]}
         >
           <color attach="background" args={['#07090f']} />
@@ -65,9 +66,10 @@ function Stage() {
             maxPolarAngle={Math.PI * 0.49}
             minDistance={5.5}
             maxDistance={14}
-            target={[0, 0.45, 0]}
+            target={[0, 0.15, 0]}
           />
         </Canvas>
+      </div>
       </div>
 
       <p className="station-line">
