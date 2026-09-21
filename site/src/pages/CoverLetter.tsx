@@ -5,7 +5,7 @@ export default function CoverLetterPage() {
   return (
     <div className="page">
       <div className="page-nav">
-        <Link className="pill" to="/">← Scene</Link>
+        <Link className="pill" to="/">← Back</Link>
         <Link className="pill" to="/resume">Resume</Link>
         <a className="pill" href="/docs/David%20Kohler%20cover%20letter.docx" download>Download cover letter (.docx)</a>
         <a className="pill" href="/docs/David%20Kohler%20cover%20letter.txt" download>Download cover letter (.txt)</a>

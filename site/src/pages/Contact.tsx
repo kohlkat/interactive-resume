@@ -10,7 +10,7 @@ export default function ContactPage() {
   return (
     <div className="page">
       <div className="page-nav">
-        <Link className="pill" to="/">← Scene</Link>
+        <Link className="pill" to="/">← Back</Link>
         <Link className="pill" to="/resume">Resume</Link>
       </div>
       <h1>Contact</h1>

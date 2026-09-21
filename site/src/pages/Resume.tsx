@@ -5,7 +5,7 @@ export default function ResumePage() {
   return (
     <div className="page">
       <div className="page-nav">
-        <Link className="pill" to="/">← Scene</Link>
+        <Link className="pill" to="/">← Back</Link>
         <Link className="pill" to="/cover">Cover letter</Link>
         <a className="pill" href="/docs/David%20Kohler%20resume.docx" download>Download resume (.docx)</a>
         <a className="pill" href="/docs/David%20Kohler%20resume.txt" download>Download resume (.txt)</a>

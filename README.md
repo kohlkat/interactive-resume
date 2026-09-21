@@ -2,8 +2,9 @@
 
 **Not** in the Zaraa monorepo. **Not** synced to GBrain.
 
+The site is a phone briefing: one sentence, five chapters, then the traditional resume and cover letter as a download. The street address stays in those files only.
+
 Source Drive folder: `Interactive resume and regular resume`
-- `interactive-resume-three-v6.3.zip` (partial R3F slice → completed here)
 - `David Kohler resume.docx`
 - `David Kohler cover letter.docx`
 
@@ -14,8 +15,6 @@ cd /Users/zaraa/Code/kohlkat-interactive-resume/site
 npm install
 npm run dev
 ```
-
-Optional GLBs: see `scripts/fetch-assets.sh`, then `VITE_USE_MODELS=1 npm run dev`.
 
 ## Deploy to Kohlkat Vercel only
 
