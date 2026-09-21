@@ -34,18 +34,20 @@ h1, h2, h3 {
 
 .stage {
   min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  gap: 12px;
-  padding: 18px 18px 12px;
+  grid-template-rows: auto auto minmax(16rem, 1fr) auto auto;
+  gap: 10px;
+  padding:
+    calc(12px + env(safe-area-inset-top))
+    calc(12px + env(safe-area-inset-right))
+    calc(12px + env(safe-area-inset-bottom))
+    calc(12px + env(safe-area-inset-left));
 }
 
 .topbar {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 10px;
 }
 
 .eyebrow {
@@ -57,7 +59,7 @@ h1, h2, h3 {
 }
 
 .brand-block h1 {
-  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-size: 1.85rem;
   line-height: 0.95;
 }
 
@@ -69,29 +71,48 @@ h1, h2, h3 {
 }
 
 .topbar-actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 8px;
-  align-items: center;
-  justify-content: flex-end;
+}
+
+.hint-row {
+  display: grid;
+  gap: 8px;
+}
+
+.hint-copy {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .nav {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  margin-inline: calc(env(safe-area-inset-left) * -1);
+  padding-bottom: 2px;
 }
+
+.nav::-webkit-scrollbar { display: none; }
 
 .pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  flex: 0 0 auto;
+  min-height: 44px;
   border: 1px solid var(--line);
   background: rgba(255,255,255,0.03);
   color: var(--ink);
   border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 12px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 13px;
   line-height: 1;
   cursor: pointer;
   text-decoration: none !important;
@@ -107,64 +128,56 @@ h1, h2, h3 {
 
 .canvas-shell {
   position: relative;
-  min-height: min(68vh, 720px);
+  min-height: 52vh;
+  min-height: 52dvh;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 16px;
   overflow: hidden;
+  touch-action: none;
   background:
     linear-gradient(160deg, rgba(255,255,255,0.03), transparent 40%),
     var(--bg1);
   box-shadow: var(--shadow);
 }
 
-.canvas-shell canvas { width: 100% !important; height: 100% !important; display: block; }
+.canvas-shell canvas { width: 100% !important; height: 100% !important; display: block; touch-action: none; }
 
-.cam-scrub {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 12px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: rgba(7, 9, 15, 0.72);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(8px);
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.cam-scrub input { flex: 1; }
-
-.tour-legend {
-  position: absolute;
-  top: 12px;
-  left: 12px;
+.orbit-note {
   display: grid;
-  gap: 6px;
-  max-width: min(280px, 46vw);
+  gap: 8px;
 }
 
-.tour-stop {
-  text-align: left;
+.orbit-note p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.station-key {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.station-key::-webkit-scrollbar { display: none; }
+
+.station-key li {
+  flex: 0 0 auto;
   border: 1px solid var(--line);
-  background: rgba(7, 9, 15, 0.78);
-  color: var(--ink);
-  border-radius: 12px;
-  padding: 8px 10px;
-  cursor: pointer;
-  font: inherit;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
-.tour-stop strong { display: block; font-size: 12px; }
-.tour-stop span { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
-.tour-stop.active { border-color: var(--accent); }
-.tour-stop.open strong { color: var(--ok); }
+.station-key li.open { color: var(--ok); border-color: rgba(52, 211, 153, 0.45); }
 
 .station-label {
-  width: 168px;
+  width: 132px;
   padding: 8px 10px;
   border-radius: 12px;
   background: rgba(7, 9, 15, 0.88);
@@ -179,7 +192,7 @@ h1, h2, h3 {
 .station-label span { color: #93a0b8; }
 .station-label.active { border-color: #5eead4; }
 .station-label.open strong { color: #34d399; }
-.station-label.center-label { width: 210px; text-align: center; }
+.station-label.center-label { width: 168px; text-align: center; }
 
 .privacy-note {
   color: var(--warn);
@@ -199,15 +212,22 @@ h1, h2, h3 {
 .page {
   max-width: 920px;
   margin: 0 auto;
-  padding: 22px 18px 48px;
+  padding:
+    calc(16px + env(safe-area-inset-top))
+    calc(14px + env(safe-area-inset-right))
+    calc(32px + env(safe-area-inset-bottom))
+    calc(14px + env(safe-area-inset-left));
 }
 
 .page-nav {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+
+.page-nav::-webkit-scrollbar { display: none; }
 
 .card {
   background: var(--card);
@@ -220,7 +240,7 @@ h1, h2, h3 {
 .grid {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .badge {
@@ -233,7 +253,8 @@ h1, h2, h3 {
   white-space: pre-wrap;
   line-height: 1.55;
   color: #d7deeb;
-  font-size: 13.5px;
+  font-size: 15px;
+  overflow-wrap: anywhere;
 }
 
 .doc-actions {
@@ -243,8 +264,42 @@ h1, h2, h3 {
   margin: 12px 0 18px;
 }
 
-@media (max-width: 720px) {
-  .stage { padding: 12px; }
-  .canvas-shell { min-height: 58vh; border-radius: 14px; }
-  .brand-block h1 { font-size: 2rem; }
+@media (min-width: 720px) {
+  .stage {
+    gap: 12px;
+    padding: 18px 18px 12px;
+    grid-template-rows: auto auto minmax(28rem, 1fr) auto auto;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .brand-block h1 { font-size: 3rem; }
+
+  .topbar-actions {
+    justify-items: end;
+    max-width: 28rem;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .canvas-shell {
+    min-height: 62vh;
+    border-radius: 18px;
+  }
+
+  .station-key { flex-wrap: wrap; overflow: visible; }
+
+  .grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .page { padding: 22px 18px 48px; }
+
+  .page-nav { flex-wrap: wrap; overflow: visible; }
 }

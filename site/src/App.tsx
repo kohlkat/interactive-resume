@@ -1,28 +1,22 @@
-import { Suspense, useMemo, useState } from 'react'
+import { Suspense, useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { ContactShadows, OrbitControls } from '@react-three/drei'
 import { Link, Route, Routes, NavLink } from 'react-router-dom'
 import { ThreeScene } from './components/ThreeScene'
-import CameraPath from './components/CameraPath'
 import HintToggle from './components/HintToggle'
 import useKeyChallenges from './hooks/useKeyChallenges'
 import UnlockedPage from './pages/Unlocked'
 import ContactPage from './pages/Contact'
 import ResumePage from './pages/Resume'
 import CoverLetterPage from './pages/CoverLetter'
-import { stationIndexFromTour, stationPose, TOUR, tourValueForIndex } from './scene/stations'
+import { TOUR } from './scene/stations'
 
 function Stage() {
   const { unlocked, progress, resetAll } = useKeyChallenges()
-  const [camT, setCamT] = useState(0)
-  const [freeLook, setFreeLook] = useState(false)
   const unlockedCount = useMemo(
     () => Object.values(unlocked).filter(Boolean).length,
     [unlocked],
   )
-  const activeIndex = stationIndexFromTour(camT)
-  const active = TOUR[activeIndex]
-  const opening = stationPose(0)
 
   return (
     <div className="stage">
@@ -41,7 +35,7 @@ function Stage() {
         </div>
       </header>
 
-      <nav className="nav">
+      <nav className="nav" aria-label="Sections">
         <NavLink to="/" end className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Scene</NavLink>
         <NavLink to="/resume" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Resume</NavLink>
         <NavLink to="/cover" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Cover letter</NavLink>
@@ -53,7 +47,7 @@ function Stage() {
 
       <div className="canvas-shell">
         <Canvas
-          camera={{ position: [opening.cam.x, opening.cam.y, opening.cam.z], fov: 42 }}
+          camera={{ position: [0, 5.2, 9.2], fov: 48 }}
           dpr={[1, 1.75]}
         >
           <color attach="background" args={['#07090f']} />
@@ -62,53 +56,31 @@ function Stage() {
           <directionalLight position={[4, 8, 2]} intensity={1.2} />
           <pointLight position={[0, 3.2, 0]} intensity={8} distance={12} color="#5eead4" />
           <Suspense fallback={null}>
-            <ThreeScene unlocked={unlocked} activeId={active.id} />
+            <ThreeScene unlocked={unlocked} />
             <ContactShadows opacity={0.4} scale={14} blur={2.2} far={8} />
           </Suspense>
-          <CameraPath t={camT} enabled={!freeLook} />
           <OrbitControls
-            enabled={freeLook}
+            makeDefault
             enablePan={false}
+            enableDamping
+            dampingFactor={0.08}
             maxPolarAngle={Math.PI * 0.49}
-            minDistance={2.5}
-            maxDistance={14}
+            minDistance={3}
+            maxDistance={16}
             target={[0, 0.8, 0]}
           />
         </Canvas>
-        <div className="tour-legend">
+      </div>
+
+      <div className="orbit-note">
+        <p>Drag to orbit. Pinch or scroll to zoom.</p>
+        <ul className="station-key">
           {TOUR.map((stop, i) => (
-            <button
-              key={stop.id}
-              type="button"
-              className={`tour-stop${i === activeIndex ? ' active' : ''}${unlocked[stop.id] ? ' open' : ''}`}
-              onClick={() => {
-                setFreeLook(false)
-                setCamT(tourValueForIndex(i))
-              }}
-            >
-              <strong>{i + 1}. {stop.short}</strong>
-              <span>{stop.blurb}</span>
-            </button>
+            <li key={stop.id} className={unlocked[stop.id] ? 'open' : ''}>
+              {i + 1}. {stop.short}
+            </li>
           ))}
-        </div>
-        <div className="cam-scrub">
-          <label htmlFor="cam">Tour · {active.short}</label>
-          <input
-            id="cam"
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={camT}
-            onChange={(e) => {
-              setFreeLook(false)
-              setCamT(Number(e.target.value))
-            }}
-          />
-          <button type="button" className={`pill${freeLook ? ' active' : ''}`} onClick={() => setFreeLook((v) => !v)}>
-            {freeLook ? 'Tour camera' : 'Free orbit'}
-          </button>
-        </div>
+        </ul>
       </div>
 
       <footer className="foot">

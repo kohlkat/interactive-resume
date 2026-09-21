@@ -14,15 +14,6 @@ export type StationId = (typeof TOUR)[number]['id']
 
 const RING = 4.6
 
-export function stationIndexFromTour(t: number) {
-  const clamped = THREE.MathUtils.clamp(t, 0, 1)
-  return Math.round(clamped * (TOUR.length - 1))
-}
-
-export function tourValueForIndex(index: number) {
-  return index / (TOUR.length - 1)
-}
-
 export function stationPosition(index: number) {
   const a = (index / TOUR.length) * Math.PI * 2 - Math.PI / 2
   return new THREE.Vector3(Math.cos(a) * RING, 0, Math.sin(a) * RING)

@@ -4,7 +4,6 @@ import achievements from '../data/achievements'
 
 type Props = {
   unlocked: Record<string, boolean>
-  activeId: string
 }
 
 function Glyph({ id, on }: { id: string; on: boolean }) {
@@ -81,7 +80,7 @@ function Glyph({ id, on }: { id: string; on: boolean }) {
   )
 }
 
-export function ThreeScene({ unlocked, activeId }: Props) {
+export function ThreeScene({ unlocked }: Props) {
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow>
@@ -110,10 +109,10 @@ export function ThreeScene({ unlocked, activeId }: Props) {
           <boxGeometry args={[1.25, 0.07, 0.08]} />
           <meshStandardMaterial color="#5eead4" />
         </mesh>
-        <Html position={[0, 1.25, 0]} center distanceFactor={7} zIndexRange={[10, 0]}>
+        <Html position={[0, 1.25, 0]} center distanceFactor={8} zIndexRange={[10, 0]} style={{ pointerEvents: 'none' }}>
           <div className="station-label center-label">
             <strong>CNC cell</strong>
-            <span>Walk the ring. Each stop is a project.</span>
+            <span>Drag to orbit. Each stop is a project.</span>
           </div>
         </Html>
       </group>
@@ -122,24 +121,19 @@ export function ThreeScene({ unlocked, activeId }: Props) {
         const pose = stationPose(i)
         const achievement = achievements.find((a) => a.id === stop.id)
         const on = !!unlocked[stop.id]
-        const active = stop.id === activeId
         return (
           <group key={stop.id} position={pose.position}>
             <mesh position={[0, 0.08, 0]}>
               <cylinderGeometry args={[0.42, 0.48, 0.16, 20]} />
-              <meshStandardMaterial
-                color={active ? '#115e59' : '#111827'}
-                emissive={active ? '#14b8a6' : '#000000'}
-                emissiveIntensity={active ? 0.45 : 0}
-              />
+              <meshStandardMaterial color={on ? '#134e4a' : '#111827'} />
             </mesh>
             <mesh position={[0, 0.28, 0]}>
               <cylinderGeometry args={[0.08, 0.1, 0.28, 12]} />
               <meshStandardMaterial color={on ? '#34d399' : '#334155'} />
             </mesh>
             <Glyph id={stop.id} on={on} />
-            <Html position={[0, 1.35, 0]} center distanceFactor={6} zIndexRange={[20, 0]}>
-              <div className={`station-label${active ? ' active' : ''}${on ? ' open' : ''}`}>
+            <Html position={[0, 1.35, 0]} center distanceFactor={8} zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
+              <div className={`station-label${on ? ' open' : ''}`}>
                 <strong>{i + 1}. {stop.short}</strong>
                 <span>{on ? achievement?.title : achievement?.lockedBlurb ?? stop.blurb}</span>
               </div>
