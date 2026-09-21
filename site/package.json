@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/write-downloads.mjs && tsc --noEmit && vite build",
     "preview": "vite preview",
     "deploy:kohlkat": "bash scripts/deploy-kohlkat-vercel.sh"
   },

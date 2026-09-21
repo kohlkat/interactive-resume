@@ -1,6 +1,5 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import resumeText from '../content/resumeText'
+import { resumePublic } from '../content/documents'
 
 export default function ResumePage() {
   return (
@@ -8,17 +7,15 @@ export default function ResumePage() {
       <div className="page-nav">
         <Link className="pill" to="/">← Scene</Link>
         <Link className="pill" to="/cover">Cover letter</Link>
-        <a className="pill" href="/docs/David%20Kohler%20resume.docx" download>Download DOCX</a>
+        <a className="pill" href="/docs/David%20Kohler%20resume.docx" download>Download resume (.docx)</a>
+        <a className="pill" href="/docs/David%20Kohler%20resume.txt" download>Download resume (.txt)</a>
       </div>
       <h1>Resume</h1>
       <p style={{ color: 'var(--muted)', marginTop: 8 }}>
-        David Kohler · Robot Operator / VR Specialist · github.com/kohlkat
+        David Kohler · Robotics software, controls, and full-stack · Pittsburgh
       </p>
-      <div className="doc-actions">
-        <a className="pill" href="mailto:Dkohlkat@gmail.com">Email</a>
-        <a className="pill" href="https://github.com/kohlkat" target="_blank" rel="noreferrer">GitHub</a>
-      </div>
-      <article className="card doc">{resumeText}</article>
+      <p className="privacy-note">Mailing address is only in the downloaded file.</p>
+      <article className="card doc">{resumePublic}</article>
     </div>
   )
 }

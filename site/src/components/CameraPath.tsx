@@ -1,27 +1,25 @@
 import { useFrame, useThree } from '@react-three/fiber'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import * as THREE from 'three'
+import { stationPose, TOUR } from '../scene/stations'
 
-export default function CameraPath({ t }: { t: number }) {
+export default function CameraPath({ t, enabled }: { t: number; enabled: boolean }) {
   const { camera } = useThree()
-  const curve = useMemo(() => {
-    const pts = [
-      new THREE.Vector3(7, 3, 8),
-      new THREE.Vector3(5, 2.5, 4),
-      new THREE.Vector3(3, 2.2, 2),
-      new THREE.Vector3(1.5, 2.0, 1.2),
-      new THREE.Vector3(0, 1.8, 0),
-      new THREE.Vector3(-1.5, 1.9, -0.8),
-      new THREE.Vector3(-3, 2.2, -1.6),
-    ]
-    return new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.2)
-  }, [])
+  const camPos = useMemo(() => new THREE.Vector3(), [])
+  const look = useMemo(() => new THREE.Vector3(), [])
 
   useFrame(() => {
-    const pos = new THREE.Vector3()
-    curve.getPointAt(THREE.MathUtils.clamp(t, 0, 1), pos)
-    camera.position.lerp(pos, 0.12)
-    camera.lookAt(0, 1.6, 0)
+    if (!enabled) return
+    const segments = TOUR.length - 1
+    const f = THREE.MathUtils.clamp(t, 0, 1) * segments
+    const i = Math.min(segments - 1, Math.floor(f))
+    const u = f - i
+    const a = stationPose(i)
+    const b = stationPose(i + 1)
+    camPos.lerpVectors(a.cam, b.cam, u)
+    look.lerpVectors(a.look, b.look, u)
+    camera.position.lerp(camPos, 0.18)
+    camera.lookAt(look)
   })
 
   return null

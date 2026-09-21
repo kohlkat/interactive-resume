@@ -1,0 +1,30 @@
+David Kohler
+135 Abbeyville Road
+Pittsburgh, PA 15228
+(412) 526-6764 | Dkohlkat@gmail.com | github.com/kohlkat
+
+Dear Hiring Manager,
+
+I build robotics software and operate the machines that feed it data. I designed RS274-NEXT (SAGE-274), a control stack that extends RS-274/NGC with sensor fusion, bounded adaptive control, and deterministic networking while staying legacy-safe. I run a custom CNC cell in manual, handheld, and VR teleoperation so collection, labeling, and evaluation stay tied to the real process.
+
+I am looking for robotics software, controls, simulation, or full-stack engineering work. I am also a fit for hands-on robot or VR roles where demonstration quality and careful procedure matter.
+
+What I have built and run
+- An RS-274/NGC-compatible interpreter with SENSE{}, ADAPT{}, QOS{}, and SYNC{}. Extensions are ignored by older controllers, so existing programs keep running.
+- Real-time EKF/UKF fusion of IMU, acoustic emission, spindle current, thermal/IR, and vision/depth, producing a chatter index, tool-wear proxy, stock remaining, and thermal load.
+- Learning hooks that stay inside jerk and safety limits, plus edge inference on NPU / Jetson-class hardware with confidence gating.
+- A digital-twin path from CAD/STEP to OpenUSD and Omniverse/Isaac: randomized tasks, synthetic sensors, auto-labels, and a shadow mode before anything moves on hardware.
+- A ROS 2 / MoveIt 2 mapping so the same program can drive a mill or a 6-axis arm.
+- Production web work as CTO of Vaguely Media Group: authentication, recommendations, and a small team shipping a booking platform.
+
+How I work
+I follow procedures, troubleshoot quickly, and keep the path from hardware to model in one picture. That shortens iteration and raises the quality of both the data and the software around it.
+
+I can walk through directive grammar, fusion pipelines, policy bounds, and edge deployment. Deeper code and diagrams are available under NDA.
+
+Thank you for your time.
+
+Sincerely,
+David Kohler
+Pittsburgh, PA
+(412) 526-6764 | Dkohlkat@gmail.com | github.com/kohlkat

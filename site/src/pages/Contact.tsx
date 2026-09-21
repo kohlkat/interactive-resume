@@ -15,7 +15,7 @@ export default function ContactPage() {
       </div>
       <h1>Contact</h1>
       <p style={{ color: 'var(--muted)' }}>
-        David Kohler · Dkohlkat@gmail.com · (412) 526-6764 · github.com/kohlkat
+        David Kohler · Pittsburgh · Dkohlkat@gmail.com · (412) 526-6764 · github.com/kohlkat
       </p>
       <div style={{ marginTop: 16, display: 'grid', gap: 12 }}>
         <QrCard url={url} />
