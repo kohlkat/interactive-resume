@@ -33,21 +33,24 @@ h1, h2, h3 {
 }
 
 .stage {
+  width: min(100%, 40rem);
+  margin-inline: auto;
   min-height: 100vh;
   min-height: 100dvh;
-  display: grid;
-  grid-template-rows: auto auto minmax(16rem, 1fr) auto auto;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4dvh, 14px);
   padding:
-    calc(12px + env(safe-area-inset-top))
+    calc(10px + env(safe-area-inset-top))
     calc(12px + env(safe-area-inset-right))
-    calc(12px + env(safe-area-inset-bottom))
+    calc(10px + env(safe-area-inset-bottom))
     calc(12px + env(safe-area-inset-left));
 }
 
 .topbar {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .eyebrow {
@@ -59,20 +62,37 @@ h1, h2, h3 {
 }
 
 .brand-block h1 {
-  font-size: 1.85rem;
-  line-height: 0.95;
+  font-size: clamp(1.45rem, 6.2vw, 1.85rem);
+  line-height: 1;
 }
 
 .lede {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   color: var(--muted);
-  max-width: 42rem;
-  line-height: 1.45;
+  max-width: 36rem;
+  font-size: clamp(12px, 3.3vw, 14px);
+  line-height: 1.4;
 }
 
 .topbar-actions {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.quiet, .text-btn {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.text-btn {
+  border: 0;
+  background: none;
+  padding: 6px 0;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .hint-row {
@@ -89,12 +109,9 @@ h1, h2, h3 {
 
 .nav {
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  margin-inline: calc(env(safe-area-inset-left) * -1);
-  padding-bottom: 2px;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 0;
 }
 
 .nav::-webkit-scrollbar { display: none; }
@@ -104,15 +121,15 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  flex: 0 0 auto;
-  min-height: 44px;
+  flex: 1 1 5.6rem;
+  min-height: 36px;
   border: 1px solid var(--line);
   background: rgba(255,255,255,0.03);
   color: var(--ink);
   border-radius: 999px;
-  padding: 10px 14px;
+  padding: 8px 10px;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1;
   cursor: pointer;
   text-decoration: none !important;
@@ -128,71 +145,64 @@ h1, h2, h3 {
 
 .canvas-shell {
   position: relative;
-  min-height: 52vh;
-  min-height: 52dvh;
+  flex: 1 1 auto;
+  min-height: clamp(210px, 46dvh, 460px);
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   touch-action: none;
   background:
-    linear-gradient(160deg, rgba(255,255,255,0.03), transparent 40%),
+    radial-gradient(120% 80% at 50% 40%, rgba(94, 234, 212, 0.05), transparent 55%),
     var(--bg1);
   box-shadow: var(--shadow);
 }
 
 .canvas-shell canvas { width: 100% !important; height: 100% !important; display: block; touch-action: none; }
 
-.orbit-note {
-  display: grid;
-  gap: 8px;
-}
-
-.orbit-note p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.station-key {
+.station-line {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 10px;
   margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.station-key::-webkit-scrollbar { display: none; }
-
-.station-key li {
-  flex: 0 0 auto;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 8px 12px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: clamp(11px, 2.8vw, 12px);
+  line-height: 1.4;
 }
 
-.station-key li.open { color: var(--ok); border-color: rgba(52, 211, 153, 0.45); }
+.station-line .open { color: var(--ok); }
 
-.station-label {
-  width: 132px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: rgba(7, 9, 15, 0.88);
-  border: 1px solid rgba(232, 237, 247, 0.16);
-  color: #e8edf7;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 11px;
-  line-height: 1.35;
+.intro-mark {
+  width: min(210px, 62vw);
+  text-align: center;
   pointer-events: none;
 }
-.station-label strong { display: block; font-size: 12px; margin-bottom: 2px; }
-.station-label span { color: #93a0b8; }
-.station-label.active { border-color: #5eead4; }
-.station-label.open strong { color: #34d399; }
-.station-label.center-label { width: 168px; text-align: center; }
+
+.intro-mark strong {
+  display: block;
+  font-family: Syne, "Avenir Next", sans-serif;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+
+.intro-mark span {
+  display: block;
+  margin-top: 3px;
+  color: #93a0b8;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.mark {
+  color: #c5d0e0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+.mark.open { color: #5eead4; }
 
 .privacy-note {
   color: var(--warn);
@@ -203,10 +213,11 @@ h1, h2, h3 {
 .foot {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  justify-content: center;
+  gap: 6px 14px;
   color: var(--muted);
   font-size: 12px;
-  padding: 4px 2px 8px;
+  padding: 0 2px 2px;
 }
 
 .page {
@@ -221,10 +232,9 @@ h1, h2, h3 {
 
 .page-nav {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-bottom: 16px;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
 
 .page-nav::-webkit-scrollbar { display: none; }
@@ -266,40 +276,25 @@ h1, h2, h3 {
 
 @media (min-width: 720px) {
   .stage {
-    gap: 12px;
-    padding: 18px 18px 12px;
-    grid-template-rows: auto auto minmax(28rem, 1fr) auto auto;
+    width: min(100%, 52rem);
+    gap: 14px;
+    padding: 20px 20px 14px;
   }
 
   .topbar {
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 18px;
   }
 
-  .brand-block h1 { font-size: 3rem; }
+  .brand-block h1 { font-size: 2.4rem; }
 
-  .topbar-actions {
-    justify-items: end;
-    max-width: 28rem;
-  }
+  .nav .pill { flex: 0 1 auto; min-height: 40px; padding: 8px 14px; }
 
-  .nav {
-    flex-wrap: wrap;
-    overflow: visible;
-  }
-
-  .canvas-shell {
-    min-height: 62vh;
-    border-radius: 18px;
-  }
-
-  .station-key { flex-wrap: wrap; overflow: visible; }
+  .canvas-shell { min-height: clamp(360px, 58dvh, 640px); }
 
   .grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
   .page { padding: 22px 18px 48px; }
-
-  .page-nav { flex-wrap: wrap; overflow: visible; }
 }

@@ -12,7 +12,7 @@ export const TOUR = [
 
 export type StationId = (typeof TOUR)[number]['id']
 
-const RING = 4.6
+const RING = 3.55
 
 export function stationPosition(index: number) {
   const a = (index / TOUR.length) * Math.PI * 2 - Math.PI / 2

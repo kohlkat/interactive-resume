@@ -30,25 +30,23 @@ function Stage() {
         </div>
         <div className="topbar-actions">
           <HintToggle />
-          <div className="pill muted">Unlocked {unlockedCount}/7 · {progress}%</div>
-          <button type="button" className="pill ghost" onClick={resetAll}>Reset</button>
+          <span className="quiet">{unlockedCount}/7 unlocked · {progress}%</span>
+          <button type="button" className="text-btn" onClick={resetAll}>Reset</button>
         </div>
       </header>
 
       <nav className="nav" aria-label="Sections">
         <NavLink to="/" end className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Scene</NavLink>
         <NavLink to="/resume" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Resume</NavLink>
-        <NavLink to="/cover" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Cover letter</NavLink>
+        <NavLink to="/cover" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Letter</NavLink>
         <NavLink to="/unlocked" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Unlocked</NavLink>
         <NavLink to="/contact" className={({ isActive }) => isActive ? 'pill active' : 'pill'}>Contact</NavLink>
-        <a className="pill" href="/docs/David%20Kohler%20resume.docx" download>Download resume</a>
-        <a className="pill" href="/docs/David%20Kohler%20cover%20letter.docx" download>Download cover letter</a>
       </nav>
 
       <div className="canvas-shell">
         <Canvas
-          camera={{ position: [0, 5.2, 9.2], fov: 48 }}
-          dpr={[1, 1.75]}
+          camera={{ position: [0, 4.6, 8.4], fov: 36 }}
+          dpr={[1, 1.5]}
         >
           <color attach="background" args={['#07090f']} />
           <fog attach="fog" args={['#07090f', 10, 24]} />
@@ -65,28 +63,25 @@ function Stage() {
             enableDamping
             dampingFactor={0.08}
             maxPolarAngle={Math.PI * 0.49}
-            minDistance={3}
-            maxDistance={16}
-            target={[0, 0.8, 0]}
+            minDistance={5.5}
+            maxDistance={14}
+            target={[0, 0.45, 0]}
           />
         </Canvas>
       </div>
 
-      <div className="orbit-note">
-        <p>Drag to orbit. Pinch or scroll to zoom.</p>
-        <ul className="station-key">
-          {TOUR.map((stop, i) => (
-            <li key={stop.id} className={unlocked[stop.id] ? 'open' : ''}>
-              {i + 1}. {stop.short}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <p className="station-line">
+        {TOUR.map((stop) => (
+          <span key={stop.id} className={unlocked[stop.id] ? 'open' : ''}>{stop.short}</span>
+        ))}
+      </p>
 
       <footer className="foot">
-        <span>github.com/kohlkat</span>
-        <span>Dkohlkat@gmail.com</span>
-        <Link to="/contact">vCard + QR</Link>
+        <a href="https://github.com/kohlkat" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="mailto:Dkohlkat@gmail.com">Email</a>
+        <a href="/docs/David%20Kohler%20resume.docx" download>Resume</a>
+        <a href="/docs/David%20Kohler%20cover%20letter.docx" download>Cover letter</a>
+        <Link to="/contact">vCard</Link>
       </footer>
     </div>
   )
